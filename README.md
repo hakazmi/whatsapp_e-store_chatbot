@@ -128,7 +128,7 @@ whatsapp-e-commerce-assistant/
 ├── Dockerfile.frontend        # Frontend Docker image
 ├── docker-compose.yml         # Docker orchestration
 └── README.md                  # Project documentation
-
+```
 ## 📋 Prerequisites
 
 ### 🧑‍💻 For Local Development

@@ -155,70 +155,70 @@ whatsapp-e-commerce-assistant/
 
 - git clone https://github.com/yourusername/whatsapp-ecommerce-assistant.git
 - cd whatsapp-ecommerce-assistant
-2. Set Up Backend
+### 2. Set Up Backend
 
-# Create virtual environment
+- Create virtual environment
 - python -m venv venv
 
-# Activate virtual environment
-# On Windows:
+### Activate virtual environment
+- On Windows:
 - venv\Scripts\activate
-# On macOS/Linux:
+### On macOS/Linux:
 - source venv/bin/activate
 
-# Install dependencies
+### Install dependencies
 - pip install -r requirements.txt
-3. Set Up Frontend
+### 3. Set Up Frontend
 - cd frontend
 - npm install
 cd ..
-4. Configure Environment Variables
+### 4. Configure Environment Variables
 - Create a .env file in the project root:
 
 
-# Salesforce Configuration
+### Salesforce Configuration
 - SALESFORCE_USERNAME=your_salesforce_username
 - SALESFORCE_PASSWORD=your_salesforce_password
 - SALESFORCE_SECURITY_TOKEN=your_security_token
 
-# OpenAI Configuration
+### OpenAI Configuration
 - OPENAI_API_KEY=your_openai_api_key
 
-# Twilio Configuration
+### Twilio Configuration
 - TWILIO_ACCOUNT_SID=your_twilio_account_sid
 - TWILIO_AUTH_TOKEN=your_twilio_auth_token
 - TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
 
-# MongoDB Atlas
+### MongoDB Atlas
 - MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/
 - MONGODB_DB=whatsapp_shopping
 
-# Ngrok (get from https://ngrok.com)
+### Ngrok (get from https://ngrok.com)
 - NGROK_AUTHTOKEN=your_ngrok_auth_token
 
-# API Configuration
+### API Configuration
 - MAIN_API_URL=http://localhost:8000/api
 5. Start Services (5 Terminals)
 
-# Terminal 1: MCP Server
+### Terminal 1: MCP Server
 - cd backend
 - python mcp_server.py
 
-# Terminal 2: Main API
+### Terminal 2: Main API
 - cd backend
 - python main.py
 
-# Terminal 3: WhatsApp Server
+### Terminal 3: WhatsApp Server
 - cd backend
 - python whatsapp_server.py
 
-# Terminal 4: Ngrok
+### Terminal 4: Ngrok
 - ngrok http 5000
 
-# Terminal 5: Frontend
+### Terminal 5: Frontend
 - cd frontend
 - npm run dev
-6. Configure Twilio Webhook
+### 6. Configure Twilio Webhook
 - Copy the HTTPS URL from Ngrok (Terminal 4)
 
 - Go to Twilio WhatsApp Sandbox
@@ -229,7 +229,7 @@ cd ..
 - Save the configuration
 
 
-7. Access the Application
+### 7. Access the Application
 - Service	URL	Description
 - 🖥️ Frontend	http://localhost:5173
 - 	Web Interface
@@ -283,10 +283,10 @@ cd ..
 
 - Option B: Command Line
 
-# Windows PowerShell
+### Windows PowerShell
 - (Invoke-WebRequest -Uri "http://localhost:4040/api/tunnels" | ConvertFrom-Json).tunnels[0].public_url
 
-# macOS/Linux
+### macOS/Linux
 - curl http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'
 
 ### 6. Configure Twilio Webhook
@@ -299,16 +299,16 @@ cd ..
 - Paste this URL into your Twilio WhatsApp Sandbox Settings.
 
 ### 7. Verify Services
-# Check container status
+### Check container status
 - docker-compose ps
 
-# View logs
+### View logs
 - docker-compose logs -f
 
-# Test Main API
+### Test Main API
 - curl http://localhost:8000/health
 
-# Test WhatsApp Server
+### Test WhatsApp Server
 - curl http://localhost:5000/
 
 ### 8. Access the Application
@@ -338,136 +338,133 @@ cd ..
    ```env
    MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/
    MONGODB_DB=whatsapp_shopping
-🏢 Salesforce Setup
-Sign up for a Salesforce Developer Account at developer.salesforce.com
+### 🏢 Salesforce Setup
+- Sign up for a Salesforce Developer Account at developer.salesforce.com
 
-Create custom fields on Product2:
+- Create custom fields on Product2:
 
-Color__c (Text)
+- Color__c (Text)
 
-Size__c (Text)
+- Size__c (Text)
 
-Image_URL__c (URL)
+- Image_URL__c (URL)
 
-Get your security token from Salesforce Settings
+- Get your security token from Salesforce Settings
 
-Add your Salesforce credentials to .env
+- Add your Salesforce credentials to .env
 
-💬 Twilio WhatsApp Setup
-Sign up at Twilio
+### 💬 Twilio WhatsApp Setup
+- Sign up at Twilio
 
-Activate your WhatsApp Sandbox
+- Activate your WhatsApp Sandbox
 
-Get your Account SID and Auth Token
+- Get your Account SID and Auth Token
 
-Add them to .env:
+- Add them to .env:
 
-env
-TWILIO_ACCOUNT_SID=your_twilio_account_sid
-TWILIO_AUTH_TOKEN=your_twilio_auth_token
-TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
-Configure the webhook URL from your Ngrok instance (e.g. https://YOUR_NGROK_URL.ngrok.io/webhook)
+- env
+- TWILIO_ACCOUNT_SID=your_twilio_account_sid
+- TWILIO_AUTH_TOKEN=your_twilio_auth_token
+- TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
+- Configure the webhook URL from your Ngrok instance (e.g. https://YOUR_NGROK_URL.ngrok.io/webhook)
 
-🌐 Ngrok Setup
-Sign up at Ngrok
+### 🌐 Ngrok Setup
+- Sign up at Ngrok
 
-Get your auth token from the Ngrok dashboard
+- Get your auth token from the Ngrok dashboard
 
-Add it to .env:
+- Add it to .env:
 
-env
+- env
 
-NGROK_AUTHTOKEN=your_token_here
-📱 Usage
-🖥️ Web Interface
-🛍️ Browse Products
-Navigate to http://localhost:5173
+- NGROK_AUTHTOKEN=your_token_here
+# 📱 Usage
+### 🖥️ Web Interface
+### 🛍️ Browse Products
+- Navigate to http://localhost:5173
 
-Use search and filters to find products
+- Use search and filters to find products
+- View detailed product information
 
-View detailed product information
+### 🛒 Manage Cart
+- Add products to your cart
 
-🛒 Manage Cart
-Add products to your cart
+- Update quantities in real-time
 
-Update quantities in real-time
+- Remove unwanted items
 
-Remove unwanted items
+### 💳 Checkout
+- Fill in customer details (name, email, phone)
 
-💳 Checkout
-Fill in customer details (name, email, phone)
+- Review your order summary
 
-Review your order summary
+- Place the order seamlessly
 
-Place the order seamlessly
+###  🧑‍💼 Admin Panel
+- Manage product inventory (CRUD operations)
+- View session-specific products
+- Track order history and status
 
-🧑‍💼 Admin Panel
-Manage product inventory (CRUD operations)
+- 💬 WhatsApp Bot
+- Send messages to your Twilio WhatsApp number and start chatting with your AI shopping assistant.
 
-View session-specific products
+### 🗣️ Example Conversations
+- User:
 
-Track order history and status
+- Hello
 
-💬 WhatsApp Bot
-Send messages to your Twilio WhatsApp number and start chatting with your AI shopping assistant.
+- Bot:
 
-🗣️ Example Conversations
-User:
+- Hey! 👋 I'm your shopping assistant! I can help you browse, manage your cart, or place an order.
 
-Hello
+- User:
 
-Bot:
+- Show me silver watches
 
-Hey! 👋 I'm your shopping assistant! I can help you browse, manage your cart, or place an order.
+- Bot:
 
-User:
+- Here are 3 great watches for you:
+- 1️⃣ Chronograph Watch - $129.99
+- 2️⃣ Classic Silver - $99.50
+- 3️⃣ Titan Edge - $149.00
 
-Show me silver watches
+- User:
 
-Bot:
+- Add option 1
 
-Here are 3 great watches for you:
-1️⃣ Chronograph Watch - $129.99
-2️⃣ Classic Silver - $99.50
-3️⃣ Titan Edge - $149.00
+- Bot:
 
-User:
+- ✅ Added Chronograph Watch to your cart!
+- 🛒 Your Cart: 1 item - Total $129.99
 
-Add option 1
+- User:
 
-Bot:
+- Checkout
 
-✅ Added Chronograph Watch to your cart!
-🛒 Your Cart: 1 item - Total $129.99
+- Bot:
 
-User:
+- Great! Let's complete your order 🎉
+- To proceed, I need the following details:
+- 📝 Full Name
+- 📧 Email Address
+- 📱 Phone Number
 
-Checkout
+- User:
 
-Bot:
+- John Doe, john@email.com, +1234567890
 
-Great! Let's complete your order 🎉
-To proceed, I need the following details:
-📝 Full Name
-📧 Email Address
-📱 Phone Number
+- Bot:
 
-User:
+- 📋 Order Confirmation
+- 🛍️ Items: Chronograph Watch
+- 💵 Total: $129.99
+- Say ‘Yes’ to confirm your order
 
-John Doe, john@email.com, +1234567890
+- User:
 
-Bot:
+- Yes
 
-📋 Order Confirmation
-🛍️ Items: Chronograph Watch
-💵 Total: $129.99
-Say ‘Yes’ to confirm your order
+- Bot:
 
-User:
-
-Yes
-
-Bot:
-
-🎉 Order Confirmed!
-✅ Order Number: #00001234
+- 🎉 Order Confirmed!
+- ✅ Order Number: #00001234

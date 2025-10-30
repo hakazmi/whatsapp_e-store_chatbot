@@ -190,7 +190,7 @@ cd ..
 - TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
 
 ### MongoDB Atlas
-- MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/
+- MONGODB_URI=mongodb+srv:
 - MONGODB_DB=whatsapp_shopping
 
 ### Ngrok (get from https://ngrok.com)
@@ -336,7 +336,7 @@ cd ..
 4. Get your **connection string**  
 5. Add the following to your `.env` file:
    ```env
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/
+   MONGODB_URI=mongodb+srv:
    MONGODB_DB=whatsapp_shopping
 ### 🏢 Salesforce Setup
 - Sign up for a Salesforce Developer Account at developer.salesforce.com

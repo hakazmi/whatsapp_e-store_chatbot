@@ -1,0 +1,88 @@
+# Backend Dockerfile
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements file
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy backend code
+COPY backend/ ./backend/
+COPY salesforce/ ./salesforce/
+COPY .env .
+
+# Set Python path
+ENV PYTHONPATH=/app
+
+# Expose ports
+# 8001 - MCP Server
+# 8000 - Main API
+# 5000 - WhatsApp Server
+EXPOSE 8001 8000 5000
+
+# Create startup script that keeps container alive
+RUN echo '#!/bin/bash\n\
+set -e\n\
+\n\
+# Trap SIGTERM and SIGINT to gracefully shutdown\n\
+trap "echo \"Shutting down...\"; kill -TERM $MCP_PID $MAIN_PID $WHATSAPP_PID 2>/dev/null; exit 0" SIGTERM SIGINT\n\
+\n\
+echo "🚀 Starting MCP Server..."\n\
+cd /app/backend\n\
+python -u mcp_server.py > /proc/1/fd/1 2>&1 &\n\
+MCP_PID=$!\n\
+echo "   PID: $MCP_PID"\n\
+\n\
+echo "⏳ Waiting for MCP Server to start..."\n\
+sleep 5\n\
+\n\
+echo "🚀 Starting Main API..."\n\
+uvicorn main:app --host 0.0.0.0 --port 8000 > /proc/1/fd/1 2>&1 &\n\
+MAIN_PID=$!\n\
+echo "   PID: $MAIN_PID"\n\
+\n\
+echo "⏳ Waiting for Main API to start..."\n\
+sleep 3\n\
+\n\
+echo "🚀 Starting WhatsApp Server..."\n\
+uvicorn whatsapp_server:app --host 0.0.0.0 --port 5000 > /proc/1/fd/1 2>&1 &\n\
+WHATSAPP_PID=$!\n\
+echo "   PID: $WHATSAPP_PID"\n\
+\n\
+echo "✅ All services started!"\n\
+echo "   MCP Server: http://0.0.0.0:8001 (PID: $MCP_PID)"\n\
+echo "   Main API: http://0.0.0.0:8000 (PID: $MAIN_PID)"\n\
+echo "   WhatsApp Server: http://0.0.0.0:5000 (PID: $WHATSAPP_PID)"\n\
+echo ""\n\
+echo "📊 Monitoring processes..."\n\
+\n\
+# Keep container running and monitor processes\n\
+while true; do\n\
+  if ! kill -0 $MCP_PID 2>/dev/null; then\n\
+    echo "❌ MCP Server died!"\n\
+    exit 1\n\
+  fi\n\
+  if ! kill -0 $MAIN_PID 2>/dev/null; then\n\
+    echo "❌ Main API died!"\n\
+    exit 1\n\
+  fi\n\
+  if ! kill -0 $WHATSAPP_PID 2>/dev/null; then\n\
+    echo "❌ WhatsApp Server died!"\n\
+    exit 1\n\
+  fi\n\
+  sleep 5\n\
+done\n\
+' > /app/start.sh && chmod +x /app/start.sh
+
+CMD ["/app/start.sh"]

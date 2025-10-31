@@ -231,7 +231,7 @@ cd ..
 
 ### 7. Access the Application
 - Service	URL	Description
-- 🖥️ Frontend	http://localhost:5173
+- 🖥️ Frontend	http://localhost:8080
 - 	Web Interface
 - 📘 API Docs	http://localhost:8000/docs
 - 	Swagger UI
@@ -270,7 +270,7 @@ cd ..
 
 - ✅ Backend container (ports 8001, 8000, 5000)
 
-- ✅ Frontend container (port 5173)
+- ✅ Frontend container (port 8080)
 
 - ✅ Ngrok container (port 4040)
 
@@ -313,7 +313,7 @@ cd ..
 
 ### 8. Access the Application
 - Service	URL	Description
-- 🖥️ Frontend	http://localhost:5173
+- 🖥️ Frontend	http://localhost:8080
 - 	Web UI
 - 📘 API Docs	http://localhost:8000/docs
 - 	Swagger UI
@@ -381,7 +381,7 @@ cd ..
 # 📱 Usage
 ### 🖥️ Web Interface
 ### 🛍️ Browse Products
-- Navigate to http://localhost:5173
+- Navigate to http://localhost:8080
 
 - Use search and filters to find products
 - View detailed product information
